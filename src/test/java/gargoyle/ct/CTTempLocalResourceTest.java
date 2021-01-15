@@ -1,9 +1,9 @@
 package gargoyle.ct;
 
-import gargoyle.ct.messages.impl.CTMessages;
+import gargoyle.ct.messages.impl.CTFixedLocaleProvider;
 import gargoyle.ct.resource.Resource;
 import gargoyle.ct.resource.internal.TempLocalResource;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.logging.Logger;
@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CTTempLocalResourceTest {
+    @NotNull
     private final Logger logger = LoggerFactory.getLogger(CTTempLocalResourceTest.class);
-    @Nullable
     private Resource resource;
 
     @Test
@@ -32,7 +32,7 @@ public class CTTempLocalResourceTest {
     @BeforeEach
     public void setUp() {
         resource = new TempLocalResource("resource.txt")
-                .forLocale(new CTMessages("messages").getLocale());
+                .forLocale(new CTFixedLocaleProvider().getLocale());
     }
 
     @Test

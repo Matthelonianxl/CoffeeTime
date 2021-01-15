@@ -29,7 +29,6 @@ public class CTTaskTest {
 
     @BeforeEach
     public void setUp() {
-        task = new CTTask();
     }
 
     @AfterEach
@@ -39,6 +38,7 @@ public class CTTaskTest {
 
     @Test
     public void testBlockedFalse() {
+        task = new CTTask();
         long current = CTTimeUtil.make(10, 45, 10);
         assertFalse(task.isBlocked(current), "should not block");
         task.setConfig(new CTConfig(TimeUnit.MINUTES, WHOLE_1H, BLOCK_10M, WARN_3M));
@@ -51,6 +51,7 @@ public class CTTaskTest {
 
     @Test
     public void testBlockedTrue() {
+        task = new CTTask();
         task.setConfig(new CTConfig(TimeUnit.MINUTES, WHOLE_1H, BLOCK_10M, WARN_3M));
         long current = CTTimeUtil.make(10, 55, 10);
         long started = CTTimeUtil.downTo(current, CTTimeUtil.toMillis(TimeUnit.HOURS, 1));
@@ -62,6 +63,7 @@ public class CTTaskTest {
 
     @Test
     public void testSleepingFalse() {
+        task = new CTTask();
         long current = CTTimeUtil.make(10, 51, 10);
         assertFalse(task.isWarn(current), "no warnings here");
         task.setConfig(new CTConfig(TimeUnit.MINUTES, WHOLE_1H, BLOCK_10M, WARN_3M));
@@ -74,6 +76,7 @@ public class CTTaskTest {
 
     @Test
     public void testSleepingTrue() {
+        task = new CTTask();
         task.setConfig(new CTConfig(TimeUnit.MINUTES, WHOLE_1H, BLOCK_10M, WARN_3M));
         long current = CTTimeUtil.make(10, 30, 10);
         long started = CTTimeUtil.downTo(current, CTTimeUtil.toMillis(TimeUnit.HOURS, 1));
@@ -85,6 +88,7 @@ public class CTTaskTest {
 
     @Test
     public void testStarted() {
+        task = new CTTask();
         long started = CTTimeUtil.make();
         task.setStarted(started);
         actual = task.getStarted();
@@ -93,6 +97,7 @@ public class CTTaskTest {
 
     @Test
     public void testStartedUnits() {
+        task = new CTTask();
         long started = CTTimeUtil.make();
         TimeUnit unit = TimeUnit.SECONDS;
         task.setStarted(unit, started);
@@ -102,6 +107,7 @@ public class CTTaskTest {
 
     @Test
     public void testWarnFalse() {
+        task = new CTTask();
         task.setConfig(new CTConfig(TimeUnit.MINUTES, WHOLE_1H, BLOCK_10M, WARN_3M));
         long current = CTTimeUtil.make(10, 45, 10);
         long started = CTTimeUtil.downTo(current, CTTimeUtil.toMillis(TimeUnit.HOURS, 1));
@@ -113,6 +119,7 @@ public class CTTaskTest {
 
     @Test
     public void testWarnTrue() {
+        task = new CTTask();
         task.setConfig(new CTConfig(TimeUnit.MINUTES, WHOLE_1H, BLOCK_10M, WARN_3M));
         long current = CTTimeUtil.make(10, 49, 10);
         long started = CTTimeUtil.downTo(current, CTTimeUtil.toMillis(TimeUnit.HOURS, 1));

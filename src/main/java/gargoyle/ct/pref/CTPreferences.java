@@ -5,6 +5,7 @@ import gargoyle.ct.messages.Described;
 import gargoyle.ct.pref.impl.prop.CTPrefProperty;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -72,12 +73,7 @@ public interface CTPreferences extends CTPreferencesManager {
         }
 
         public static SUPPORTED_LOCALES findSimilar(Locale locale, SUPPORTED_LOCALES def) {
-            for (SUPPORTED_LOCALES value : values()) {
-                if (isSimilar(value.locale, locale)) {
-                    return value;
-                }
-            }
-            return def;
+            return Arrays.stream(values()).filter(value -> isSimilar(value.locale, locale)).findFirst().orElse(def);
         }
 
         private static boolean isSimilar(Locale locale1, Locale locale2) {
@@ -85,12 +81,7 @@ public interface CTPreferences extends CTPreferencesManager {
         }
 
         public static SUPPORTED_LOCALES forLocale(Locale locale) {
-            for (SUPPORTED_LOCALES value : values()) {
-                if (Objects.equals(value.locale, locale)) {
-                    return value;
-                }
-            }
-            return null;
+            return Arrays.stream(values()).filter(value -> isSimilar(value.locale, locale)).findFirst().orElse(null);
         }
 
         public Locale getLocale() {

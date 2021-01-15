@@ -1,6 +1,7 @@
 package gargoyle.ct.messages.util;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,16 +43,7 @@ public final class UTF8Control extends Control {
         this.charset = charset;
     }
 
-    @Override
-    public ResourceBundle newBundle(String baseName, Locale locale, String format, @NotNull ClassLoader loader, boolean reload)
-            throws IOException {
-        String bundleName = toBundleName(baseName, locale);
-        String resourceName = toResourceName(bundleName, PROPERTIES);
-        try (InputStream stream = getStream(loader, reload, resourceName)) {
-            return stream != null ? new PropertyResourceBundle(new InputStreamReader(stream, charset)) : null;
-        }
-    }
-
+    @Nullable
     private static InputStream getStream(@NotNull ClassLoader loader, boolean reload, String resourceName) throws IOException {
         if (reload) {
             URL url = loader.getResource(resourceName);
@@ -66,5 +58,16 @@ public final class UTF8Control extends Control {
             return loader.getResourceAsStream(resourceName);
         }
         return null;
+    }
+
+    @Nullable
+    @Override
+    public ResourceBundle newBundle(String baseName, Locale locale, String format, @NotNull ClassLoader loader, boolean reload)
+            throws IOException {
+        String bundleName = toBundleName(baseName, locale);
+        String resourceName = toResourceName(bundleName, PROPERTIES);
+        try (InputStream stream = getStream(loader, reload, resourceName)) {
+            return stream != null ? new PropertyResourceBundle(new InputStreamReader(stream, charset)) : null;
+        }
     }
 }

@@ -4,7 +4,7 @@ import gargoyle.ct.messages.LocaleProvider;
 import gargoyle.ct.messages.MessageProvider;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.JLabel;
+import javax.swing.*;
 
 public class CTLocalizableLabel extends JLabel {
     private static final long serialVersionUID = 1215028617118416457L;

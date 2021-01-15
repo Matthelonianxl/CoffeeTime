@@ -1,9 +1,11 @@
 package gargoyle.ct.resource.impl;
 
 import gargoyle.ct.config.CTConfig;
+import gargoyle.ct.ex.CTException;
 import gargoyle.ct.resource.Resource;
 import gargoyle.ct.resource.internal.LocalResource;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -20,7 +22,7 @@ public final class CTConfigResource extends LocalResource {
         super(url);
     }
 
-    @SuppressWarnings("MethodOverridesStaticMethodOfSuperclass")
+    @Nullable
     public static CTConfigResource findLocalConfig(@NotNull String name, boolean existing) {
         LocalResource local = LocalResource.findLocal(name);
         try {
@@ -39,7 +41,7 @@ public final class CTConfigResource extends LocalResource {
             String rootString = root.toExternalForm();
             return new CTConfigResource(new URL((rootString.endsWith(SLASH) ? rootString : rootString + SLASH) + file));
         } catch (MalformedURLException ex) {
-            throw new RuntimeException(ex);
+            throw new CTException(file, ex);
         }
     }
 }

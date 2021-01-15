@@ -14,7 +14,7 @@ public final class CTNumberUtil {
     }
 
     @NotNull
-    @SuppressWarnings({"unchecked", "JavaReflectionMemberAccess", "ChainOfInstanceofChecks"})
+    @SuppressWarnings({"unchecked", "ChainOfInstanceofChecks"})
     public static <T extends Number> T fromInt(@NotNull Class<T> type, int value) {
         try {
             if (type == Integer.class) {
@@ -34,7 +34,7 @@ public final class CTNumberUtil {
             }
             return (T) type.getMethod(METHOD_VALUE_OF, String.class).invoke(null, String.valueOf(value));
         } catch (@NotNull IllegalAccessException | InvocationTargetException | NoSuchMethodException ex) {
-            throw new RuntimeException(ex);
+            throw new IllegalArgumentException(ex);
         }
     }
 
@@ -59,10 +59,10 @@ public final class CTNumberUtil {
         try {
             def = Number.class.isAssignableFrom(type) ?
                     (T) type.getMethod(METHOD_VALUE_OF, String.class).invoke(null, "0") :
-                    type.newInstance();
+                    type.getConstructor().newInstance();
         } catch (@NotNull IllegalAccessException | InvocationTargetException | NoSuchMethodException | InstantiationException
                 ex) {
-            throw new RuntimeException(MessageFormat.format(MSG_CANNOT_CREATE_INSTANCE_OF_0, type), ex);
+            throw new IllegalArgumentException(MessageFormat.format(MSG_CANNOT_CREATE_INSTANCE_OF_0, type), ex);
         }
         return def;
     }

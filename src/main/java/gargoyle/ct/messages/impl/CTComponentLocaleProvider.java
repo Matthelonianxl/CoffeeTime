@@ -6,7 +6,7 @@ import gargoyle.ct.prop.CTObservableProperty;
 import gargoyle.ct.ui.prop.CTComponentLocaleProperty;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.Component;
+import java.awt.*;
 import java.util.Locale;
 
 public final class CTComponentLocaleProvider implements LocaleProvider {

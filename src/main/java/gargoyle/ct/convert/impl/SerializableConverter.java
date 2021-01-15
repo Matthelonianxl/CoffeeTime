@@ -15,7 +15,7 @@ public class SerializableConverter<T extends Serializable> implements Converter<
         try {
             return converter.format(CTSerializationUtil.serialize(data));
         } catch (IOException ex) {
-            throw new RuntimeException(ex);
+            throw new IllegalArgumentException(ex);
         }
     }
 
@@ -25,7 +25,7 @@ public class SerializableConverter<T extends Serializable> implements Converter<
         try {
             return CTSerializationUtil.deserialize(converter.parse(data));
         } catch (IOException ex) {
-            throw new RuntimeException(ex);
+            throw new IllegalArgumentException(data, ex);
         }
     }
 }

@@ -44,7 +44,7 @@ public class CTPropertyChangeManager {
                     try {
                         //noinspection unchecked
                         listener.onPropertyChange(event);
-                    } catch (Exception ex) {
+                    } catch (RuntimeException ex) {
                         Log.error(ex, MSG_ERROR_INVOKING_LISTENER);
                     }
                 }

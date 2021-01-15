@@ -10,11 +10,7 @@ import gargoyle.ct.prop.CTObservableProperty;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class CTMessages implements MessageProviderEx {
     private static final String CAN_T_PARSE_MESSAGE_0_1_2 = "can''t parse message:{0}->{1}({2})";
@@ -24,6 +20,7 @@ public class CTMessages implements MessageProviderEx {
     private final LocaleProvider localeProvider;
     private final MessageProvider parent;
     private ResourceBundle messages;
+    private String baseName;
 
     public CTMessages(@NotNull String baseName) {
         this(new CTFixedLocaleProvider(), null, baseName);
@@ -37,8 +34,9 @@ public class CTMessages implements MessageProviderEx {
     }
 
     private void load(@NotNull String baseName) {
+        this.baseName = baseName;
         try {
-            messages = ResourceBundle.getBundle(baseName, localeProvider.getLocale(), UTF8Control.getControl());
+            messages = ResourceBundle.getBundle(baseName, localeProvider.getLocale());
         } catch (MissingResourceException ex) {
             if (parent == null) {
                 throw new MissingResourceException(MessageFormat.format(MSG_NO_BUNDLE, baseName),
@@ -51,7 +49,7 @@ public class CTMessages implements MessageProviderEx {
     }
 
     private void reload() {
-        load(messages.getBaseBundleName());
+        load(baseName);
     }
 
     public CTMessages(MessageProvider parent, @NotNull String baseName) {

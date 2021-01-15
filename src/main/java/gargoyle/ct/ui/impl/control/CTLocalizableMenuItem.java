@@ -3,7 +3,7 @@ package gargoyle.ct.ui.impl.control;
 import gargoyle.ct.messages.LocaleProvider;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 public final class CTLocalizableMenuItem extends JMenuItem {
     private static final long serialVersionUID = -3628913101849581469L;

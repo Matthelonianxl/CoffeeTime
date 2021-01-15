@@ -3,8 +3,7 @@ package gargoyle.ct.ui.impl.control;
 import gargoyle.ct.messages.MessageProvider;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.AbstractButton;
-import javax.swing.Icon;
+import javax.swing.*;
 
 @SuppressWarnings("ConstructorNotProtectedInAbstractClass")
 public abstract class CTLocalizableAction extends CTAction {
@@ -35,7 +34,7 @@ public abstract class CTLocalizableAction extends CTAction {
         setEnabled(true);
     }
 
-    public CTLocalizableAction(MessageProvider messages, String textKey, String tooltipTextKey) {
+    protected CTLocalizableAction(MessageProvider messages, String textKey, String tooltipTextKey) {
         this.messages = messages;
         setTextKey(textKey);
         setToolTipTextKey(tooltipTextKey);
@@ -49,33 +48,31 @@ public abstract class CTLocalizableAction extends CTAction {
         menuItem.setToolTipText(getToolTipLocalizedText());
     }
 
-    @SuppressWarnings("ConstantConditions")
     @NotNull
     protected final String getLocalizedText() {
         String textKey = getTextKey();
         return textKey == null || textKey.isEmpty() ? "" : messages.getMessage(textKey);
     }
 
-    protected final String getTextKey() {
+    private String getTextKey() {
         return String.valueOf(getValue(KEY_TEXT));
     }
 
-    protected final void setTextKey(String textKey) {
+    private void setTextKey(String textKey) {
         putValue(KEY_TEXT, textKey);
     }
 
-    @SuppressWarnings("ConstantConditions")
     @NotNull
     protected final String getToolTipLocalizedText() {
         String toolTipTextKey = getToolTipTextKey();
         return toolTipTextKey == null || toolTipTextKey.isEmpty() ? "" : messages.getMessage(toolTipTextKey);
     }
 
-    protected final String getToolTipTextKey() {
+    private String getToolTipTextKey() {
         return String.valueOf(getValue(KEY_TOOLTIP));
     }
 
-    protected final void setToolTipTextKey(String toolTipTextKey) {
+    private void setToolTipTextKey(String toolTipTextKey) {
         putValue(KEY_TOOLTIP, toolTipTextKey);
     }
 }

@@ -10,19 +10,19 @@ public abstract class CTStateUpdatable implements CTTaskUpdatable {
     @Override
     public void doUpdate(@NotNull CTTask task, long currentMillis) {
         if (task.isSleeping(currentMillis)) {
-            changeState(this.state, State.SLEEP);
+            changeState(state, State.SLEEP);
         }
         if (task.isWarn(currentMillis)) {
-            changeState(this.state, State.WARN);
+            changeState(state, State.WARN);
         }
         if (task.isBlocked(currentMillis)) {
-            changeState(this.state, State.BLOCK);
+            changeState(state, State.BLOCK);
         }
     }
 
     private void changeState(State oldState, State newState) {
         if (oldState != newState) {
-            this.state = newState;
+            state = newState;
             onStateChange(oldState, newState);
         }
     }

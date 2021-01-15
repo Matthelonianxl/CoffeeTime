@@ -32,13 +32,7 @@ package gargoyle.ct.ui.util.render;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Insets;
-import java.awt.LayoutManager;
-import java.awt.LayoutManager2;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,11 +71,12 @@ import java.util.Map;
 public class GraphPaperLayout implements LayoutManager2 {
     private static final float HCENTER = 0.5f;
     private static final float VCENTER = 0.5f;
-    final int hgap;            //horizontal gap
+    private final int hgap;            //horizontal gap
     @NotNull
-    final Map<Component, Rectangle> components; //constraints (Rectangles)
-    final int vgap;            //vertical gap
+    private final Map<Component, Rectangle> components; //constraints (Rectangles)
+    private final int vgap;            //vertical gap
     @SuppressWarnings("FieldAccessedSynchronizedAndUnsynchronized")
+    private
     Dimension gridSize;  //grid size in logical units (n x m)
 
     /**
@@ -96,7 +91,7 @@ public class GraphPaperLayout implements LayoutManager2 {
      * Creates a graph paper layout with the given grid size, with no vertical
      * or horizontal padding.
      */
-    public GraphPaperLayout(@NotNull Dimension gridSize) {
+    private GraphPaperLayout(@NotNull Dimension gridSize) {
         this(gridSize, 0, 0);
     }
 
@@ -119,7 +114,7 @@ public class GraphPaperLayout implements LayoutManager2 {
      * @param hgap     horizontal padding
      * @param vgap     vertical padding
      */
-    public GraphPaperLayout(Dimension gridSize, int hgap, int vgap) {
+    private GraphPaperLayout(Dimension gridSize, int hgap, int vgap) {
         if (gridSize.width <= 0 || gridSize.height <= 0) {
             throw new IllegalArgumentException(
                     "dimensions must be greater than zero");
@@ -163,8 +158,8 @@ public class GraphPaperLayout implements LayoutManager2 {
      * @return the largest cell size required.
      */
     @NotNull
-    protected Dimension getLargestCellSize(@NotNull Container parent,
-                                           boolean isPreferred) {
+    private Dimension getLargestCellSize(@NotNull Container parent,
+                                         boolean isPreferred) {
         int componentCount = parent.getComponentCount();
         Dimension maxCellSize = new Dimension(0, 0);
         for (int i = 0; i < componentCount; i++) {
@@ -237,7 +232,7 @@ public class GraphPaperLayout implements LayoutManager2 {
      * @see GraphPaperLayout#getLargestCellSize
      */
     @NotNull
-    protected Dimension getLayoutSize(@NotNull Container parent, boolean isPreferred) {
+    private Dimension getLayoutSize(@NotNull Container parent, boolean isPreferred) {
         Dimension largestSize = getLargestCellSize(parent, isPreferred);
         Insets insets = parent.getInsets();
         largestSize.width = largestSize.width * gridSize.width +
@@ -310,7 +305,7 @@ public class GraphPaperLayout implements LayoutManager2 {
         }
     }
 
-    public void setConstraints(Component comp, @NotNull Rectangle constraints) {
+    private void setConstraints(Component comp, @NotNull Rectangle constraints) {
         components.put(comp, new Rectangle(constraints));
     }
 
@@ -375,7 +370,7 @@ public class GraphPaperLayout implements LayoutManager2 {
     /**
      * Set the size of the graph paper in logical units (n x m)
      */
-    public void setGridSize(int width, int height) {
+    private void setGridSize(int width, int height) {
         gridSize = new Dimension(width, height);
     }
 }

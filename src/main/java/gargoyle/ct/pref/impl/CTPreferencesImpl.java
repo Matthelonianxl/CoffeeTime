@@ -5,11 +5,7 @@ import gargoyle.ct.config.convert.CTUnitConverter;
 import gargoyle.ct.config.convert.impl.CTConfigConverter;
 import gargoyle.ct.convert.Converter;
 import gargoyle.ct.pref.CTPreferences;
-import gargoyle.ct.pref.impl.prop.CTPrefBooleanProperty;
-import gargoyle.ct.pref.impl.prop.CTPrefEnumProperty;
-import gargoyle.ct.pref.impl.prop.CTPrefIntegerProperty;
-import gargoyle.ct.pref.impl.prop.CTPrefObjectProperty;
-import gargoyle.ct.pref.impl.prop.CTPrefProperty;
+import gargoyle.ct.pref.impl.prop.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.TimeUnit;

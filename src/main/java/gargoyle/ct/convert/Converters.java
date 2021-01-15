@@ -1,17 +1,9 @@
 package gargoyle.ct.convert;
 
-import gargoyle.ct.convert.impl.BooleanConverter;
-import gargoyle.ct.convert.impl.ByteConverter;
-import gargoyle.ct.convert.impl.BytesConverter;
-import gargoyle.ct.convert.impl.CharConverter;
-import gargoyle.ct.convert.impl.DoubleConverter;
-import gargoyle.ct.convert.impl.FloatConverter;
-import gargoyle.ct.convert.impl.IntegerConverter;
-import gargoyle.ct.convert.impl.LongConverter;
-import gargoyle.ct.convert.impl.ShortConverter;
-import gargoyle.ct.convert.impl.StringConverter;
+import gargoyle.ct.convert.impl.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,9 +30,9 @@ public final class Converters {
             return converter;
         }
         try {
-            converter = (Converter<T>) clazz.newInstance();
-        } catch (@NotNull InstantiationException | IllegalAccessException ex) {
-            throw new RuntimeException(ex);
+            converter = (Converter<T>) clazz.getConstructor().newInstance();
+        } catch (IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
+            throw new IllegalArgumentException(e);
         }
         instances.put(clazz, converter);
         return converter;

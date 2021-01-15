@@ -13,11 +13,8 @@ import gargoyle.ct.ui.util.CTLayoutBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JSlider;
-import java.awt.Container;
-import java.awt.Window;
+import javax.swing.*;
+import java.awt.*;
 
 public class CTPreferencesDialog extends JDialog implements CTDialog<Void> {
     private static final String LOC_MESSAGES = "messages.preferences";

@@ -6,12 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.InvalidObjectException;
 import java.io.Serializable;
 import java.text.MessageFormat;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class CTConfigs implements Serializable {
     private static final String MSG_NOT_VALID_CONVERT_0 = "not valid convert: {0}";
@@ -71,7 +66,7 @@ public class CTConfigs implements Serializable {
     public int hashCode() {
         int prime = 31;
         int result = 1;
-        result = prime * result + (configs == null ? 0 : configs.hashCode());
+        result = prime * result + configs.hashCode();
         return result;
     }
 
@@ -87,7 +82,7 @@ public class CTConfigs implements Serializable {
             return false;
         }
         CTConfigs other = (CTConfigs) obj;
-        return configs == null ? other.configs == null : Objects.equals(configs, other.configs);
+        return Objects.equals(configs, other.configs);
     }
 
     @NotNull

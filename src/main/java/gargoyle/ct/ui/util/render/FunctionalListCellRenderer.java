@@ -1,8 +1,7 @@
 package gargoyle.ct.ui.util.render;
 
-import javax.swing.JList;
-import javax.swing.ListCellRenderer;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 import java.util.function.Function;
 
 public class FunctionalListCellRenderer<E> implements ListCellRenderer<E> {

@@ -21,7 +21,6 @@ public class CTConfigTimeConverterTest {
 
     @BeforeEach
     public void setUp() {
-        converter = new CTConfigConverter();
     }
 
     @AfterEach
@@ -31,6 +30,7 @@ public class CTConfigTimeConverterTest {
 
     @Test
     public void testConvert() {
+        converter = new CTConfigConverter();
         CTConfig config = new CTConfig(TimeUnit.MINUTES, WHOLE_1H, BLOCK_10M, WARN_3M);
         assertAll(
                 () -> assertEquals(config, converter.parse(converter.format(TimeUnit.MINUTES, config)), "conversion failed"),

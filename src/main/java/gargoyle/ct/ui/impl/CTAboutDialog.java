@@ -1,5 +1,6 @@
 package gargoyle.ct.ui.impl;
 
+import gargoyle.ct.ex.CTException;
 import gargoyle.ct.log.Log;
 import gargoyle.ct.messages.impl.CTMessages;
 import gargoyle.ct.ui.CTApp;
@@ -11,20 +12,8 @@ import gargoyle.ct.ver.CTVersionInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.AbstractAction;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Cursor;
-import java.awt.Desktop;
-import java.awt.Font;
-import java.awt.Rectangle;
-import java.awt.Window;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -84,7 +73,7 @@ public final class CTAboutDialog extends JDialog implements CTDialog<Void> {
         try {
             addField(descriptionKey, content, address == null ? null : new URI(address), y);
         } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            throw new CTException(descriptionKey, e);
         }
     }
 
@@ -109,7 +98,7 @@ public final class CTAboutDialog extends JDialog implements CTDialog<Void> {
 
     @Override
     public Void showMe() {
-        CTDragHelper.setLocationRelativeTo(this, this.owner);
+        CTDragHelper.setLocationRelativeTo(this, owner);
         setVisible(true);
         return null;
     }

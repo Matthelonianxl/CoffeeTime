@@ -11,30 +11,16 @@ import gargoyle.ct.util.CTTimeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.JPopupMenu;
-import javax.swing.JWindow;
-import javax.swing.ToolTipManager;
-import javax.swing.UIManager;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.GraphicsEnvironment;
-import java.awt.MouseInfo;
-import java.awt.PointerInfo;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
 public final class CTControlWindowImpl extends JWindow implements CTControlWindow {
     private static final String MSG_TOOLTIP_ERROR = "tooltip error";
     private static final String MSG_TRANSPARENCY_NOT_SUPPORTED = "transparency not supported";
-    private static final int SNAP = 20;
+    public static final int SNAP = 20;
     private static final int TOOLTIP_OFFSET = 30;
     private static final String TOOL_TIP_MANAGER_ENABLE_TOOL_TIP_MODE = "ToolTipManager.enableToolTipMode";
     private static final long serialVersionUID = 6345130901927558555L;
@@ -48,6 +34,7 @@ public final class CTControlWindowImpl extends JWindow implements CTControlWindo
     private boolean iconMode = true;
     private volatile boolean live = true;
     private volatile boolean reshow;
+    private boolean draggable;
 
     public CTControlWindowImpl(Frame owner, @NotNull CTPreferences preferences, @NotNull CTIconProvider iconProvider, JPopupMenu menu) {
         super(owner);
@@ -64,9 +51,6 @@ public final class CTControlWindowImpl extends JWindow implements CTControlWindo
         Dimension screenSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getSize();
         setLocation(screenSize.width - getWidth(), screenSize.height - getHeight());
         getOwner().setLocation(getLocation());
-        CTDragHelper.makeDraggable(textContent, SNAP);
-        CTDragHelper.makeDraggable(iconContent, SNAP);
-        CTDragHelper.makeDraggable(this, SNAP);
         addComponentListener(new OwnerUpdater(owner));
         initToolTip();
         MouseListener updater = new MouseAdapter() {
@@ -143,6 +127,10 @@ public final class CTControlWindowImpl extends JWindow implements CTControlWindo
     @Override
     public void showMe() {
         setVisible(true);
+        if (!draggable) {
+            draggable = true;
+            CTDragHelper.makeDraggable(this, SNAP);
+        }
     }
 
     @Override

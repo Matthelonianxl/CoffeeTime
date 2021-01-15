@@ -35,7 +35,7 @@ public class TempLocalResource extends ClasspathResource {
             tempFile.deleteOnExit();
             return new TempLocalResource(loader, resource, tempFile.getPath());
         } catch (IOException e) {
-            throw new RuntimeException(e.getLocalizedMessage(), e);
+            throw new IllegalArgumentException(location, e);
         }
     }
 

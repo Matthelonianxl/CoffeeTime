@@ -11,7 +11,7 @@ public final class CTConfigsDataConverter implements CTUnitConverter<String[]> {
 
     @NotNull
     @Override
-    public String format(TimeUnit unit, String... data) {
+    public String format(TimeUnit unit, @NotNull String... data) {
         StringBuilder ret = new StringBuilder();
         for (String string : data) {
             ret.append(string).append(NEWLINE);

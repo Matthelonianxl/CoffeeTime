@@ -1,6 +1,7 @@
 package gargoyle.ct.resource.internal;
 
 import gargoyle.ct.resource.Resource;
+import gargoyle.ct.util.ResourceException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,7 +44,7 @@ public class LocalResource extends VirtualResource {
                         writablePriority = writePriority;
                     }
                 } catch (MalformedURLException ex) {
-                    throw new RuntimeException(MessageFormat.format(MSG_CANNOT_USE_0_AS_ROOT, root), ex);
+                    throw new ResourceException(MessageFormat.format(MSG_CANNOT_USE_0_AS_ROOT, root), ex);
                 }
             }
         }
@@ -63,7 +64,7 @@ public class LocalResource extends VirtualResource {
                     new LocalLocation(LocalResource.class.getResource("/"), 0, 0)
             };
         } catch (MalformedURLException ex) {
-            throw new RuntimeException(MSG_CANNOT_CREATE_ROOTS, ex);
+            throw new ResourceException(MSG_CANNOT_CREATE_ROOTS, ex);
         }
     }
 
@@ -75,7 +76,7 @@ public class LocalResource extends VirtualResource {
         try {
             return new File(System.getProperty(ENV_USER_HOME, DOT)).toURI().toURL();
         } catch (MalformedURLException e) {
-            throw new RuntimeException(e.getLocalizedMessage(), e);
+            throw new ResourceException(e.getLocalizedMessage(), e);
         }
     }
 

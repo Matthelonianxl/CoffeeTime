@@ -4,7 +4,7 @@ import gargoyle.ct.messages.Described;
 import gargoyle.ct.messages.MessageProvider;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.ListCellRenderer;
+import javax.swing.*;
 
 public final class MessageProviderListCellRenderer<E extends Described> extends FunctionalListCellRenderer<E> {
     public MessageProviderListCellRenderer(final ListCellRenderer originalRenderer,
@@ -12,7 +12,7 @@ public final class MessageProviderListCellRenderer<E extends Described> extends 
         super(originalRenderer, e -> {
             try {
                 return e == null ? "" : messageProvider.getMessage(e.getDescription());
-            } catch (Exception e1) {
+            } catch (RuntimeException e1) {
                 return e.getDescription();
             }
         });

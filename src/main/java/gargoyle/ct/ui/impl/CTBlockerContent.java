@@ -7,20 +7,17 @@ import gargoyle.ct.task.impl.CTTask;
 import gargoyle.ct.ui.CTBlockerTextProvider;
 import gargoyle.ct.ui.CTInformer;
 import gargoyle.ct.ui.CTWindow;
+import gargoyle.ct.ui.util.CTDragHelper;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+
+import static gargoyle.ct.ui.impl.control.CTControlWindowImpl.SNAP;
 
 public final class CTBlockerContent extends JPanel implements CTTaskUpdatable, CTWindow, CTInformer {
     private static final float ALIGNMENT_CENTER = 0.5f;
@@ -38,6 +35,7 @@ public final class CTBlockerContent extends JPanel implements CTTaskUpdatable, C
     @SuppressWarnings("InstanceVariableMayNotBeInitializedByReadObject")
     private final transient CTPreferences preferences;
     private transient CTBlockerTextProvider textProvider;
+    private boolean draggable;
 
     public CTBlockerContent(@NotNull CTPreferences preferences, boolean big) {
         this.preferences = preferences;
@@ -96,6 +94,10 @@ public final class CTBlockerContent extends JPanel implements CTTaskUpdatable, C
     @Override
     public void showMe() {
         setVisible(true);
+        if (!draggable) {
+            draggable = true;
+            CTDragHelper.makeDraggable(this, SNAP);
+        }
     }
 
     @Override

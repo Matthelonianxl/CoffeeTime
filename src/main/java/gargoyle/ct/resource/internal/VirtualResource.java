@@ -33,7 +33,7 @@ public class VirtualResource extends AbstractResource {
         baseResource = this;
     }
 
-    @Nullable
+    @NotNull
     @Override
     public Resource forLocale(@NotNull Locale locale) {
         String location = baseResource.getLocation();
@@ -45,7 +45,7 @@ public class VirtualResource extends AbstractResource {
             VirtualResource resource = null;
             try {
                 resource = createResource(baseResource, loc);
-            } catch (Exception ignored) {
+            } catch (RuntimeException ignored) {
             }
             if (resource != null && resource.exists()) {
                 resource.locale = locale;
@@ -85,6 +85,7 @@ public class VirtualResource extends AbstractResource {
     @Override
     public Resource withExtension(String extension) {
         String location = getLocation();
+        //noinspection StringOperationCanBeSimplified
         String
                 loc =
                 new StringBuilder().append(location.substring(0, location.lastIndexOf(CHAR_DOT)))

@@ -4,7 +4,7 @@ import gargoyle.ct.pref.CTPreferences.SUPPORTED_LOCALES;
 import gargoyle.ct.prop.impl.CTBaseObservableProperty;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.Component;
+import java.awt.*;
 
 public class CTComponentLocaleProperty extends CTBaseObservableProperty<SUPPORTED_LOCALES> {
     @NotNull

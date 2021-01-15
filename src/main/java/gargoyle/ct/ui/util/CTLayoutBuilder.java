@@ -14,25 +14,9 @@ import gargoyle.ct.ui.util.render.MessageProviderListCellRenderer;
 import gargoyle.ct.util.CTNumberUtil;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.DefaultBoundedRangeModel;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JSlider;
-import javax.swing.JSpinner;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
-import javax.swing.SpinnerListModel;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.text.JTextComponent;
-import java.awt.Container;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.*;
@@ -93,7 +77,6 @@ public class CTLayoutBuilder {
         E[] enumConstants = type.getEnumConstants();
         JComboBox<E> control;
         if (allowNull) {
-            //noinspection UseOfObsoleteCollectionType
             Vector<E> list = new Vector<>(Arrays.asList(enumConstants));
             list.add(0, null);
             control = new JComboBox<>(list);

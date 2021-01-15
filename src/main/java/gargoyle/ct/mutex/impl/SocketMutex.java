@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public final class SocketMutex implements CTMutex {
-    public static final String MSG_MUTEX_ERROR = "mutex error";
+    public static final String MSG_MUTEX_ERROR = "socket mutex error";
     private final int port;
     @Nullable
     private ServerSocket mutex;
@@ -37,7 +37,7 @@ public final class SocketMutex implements CTMutex {
                 mutex = null;
             }
         } catch (IOException ex) {
-            Log.error(ex, FileMutex.MSG_MUTEX_ERROR);
+            Log.error(ex, MSG_MUTEX_ERROR);
         }
     }
 }

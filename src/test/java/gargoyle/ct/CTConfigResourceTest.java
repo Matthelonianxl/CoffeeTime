@@ -22,7 +22,7 @@ public class CTConfigResourceTest {
     }
 
     @Test
-    public void testFindResource() throws MalformedURLException {
+    public void testFindResource() {
         assumeTrue(() -> CTConfigResourceTest.class.getClassLoader().getResource(CT_CFG) != null,
                 String.format("resource %s does not exist", CT_CFG));
         CTConfigResource resource = CTConfigResource.findLocalConfig(CT_CFG, true);

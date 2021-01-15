@@ -4,13 +4,7 @@ import gargoyle.ct.log.Log;
 import gargoyle.ct.util.Defend;
 import org.jetbrains.annotations.NotNull;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
 

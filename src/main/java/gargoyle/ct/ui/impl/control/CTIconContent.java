@@ -5,10 +5,8 @@ import gargoyle.ct.ui.CTIconProvider;
 import gargoyle.ct.util.Defend;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 import java.net.URL;
 
 public class CTIconContent extends JLabel {

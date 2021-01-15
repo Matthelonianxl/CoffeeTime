@@ -29,7 +29,7 @@ public final class CTConfigDataConverter implements CTUnitConverter<long[]> {
 
     @NotNull
     @Override
-    public String format(TimeUnit unit, long... data) {
+    public String format(@NotNull TimeUnit unit, long... data) {
         String unitChar;
         switch (unit) {
             case HOURS:
@@ -41,18 +41,10 @@ public final class CTConfigDataConverter implements CTUnitConverter<long[]> {
             case SECONDS:
                 unitChar = UNIT_SECONDS;
                 break;
-            case NANOSECONDS:
-                throw new UnsupportedOperationException(MessageFormat.format(MSG_CANNOT_PARSE_LINE_INVALID_TIME_UNIT_0,
-                        unit.name()));
-            case MICROSECONDS:
-                throw new UnsupportedOperationException(MessageFormat.format(MSG_CANNOT_PARSE_LINE_INVALID_TIME_UNIT_0,
-                        unit.name()));
-            case MILLISECONDS:
-                throw new UnsupportedOperationException(MessageFormat.format(MSG_CANNOT_PARSE_LINE_INVALID_TIME_UNIT_0,
-                        unit.name()));
             case DAYS:
-                throw new UnsupportedOperationException(MessageFormat.format(MSG_CANNOT_PARSE_LINE_INVALID_TIME_UNIT_0,
-                        unit.name()));
+            case MILLISECONDS:
+            case MICROSECONDS:
+            case NANOSECONDS:
             default:
                 throw new UnsupportedOperationException(MessageFormat.format(MSG_CANNOT_PARSE_LINE_INVALID_TIME_UNIT_0,
                         unit.name()));

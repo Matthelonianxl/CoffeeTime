@@ -27,6 +27,7 @@ public class CTTimeHelperTest {
 
     @Test
     public void testFakeTime() {
+        helper = new CTTimeHelperImpl();
         long fakeTime = CTTimeUtil.currentTimeMillis();
         helper.setFakeTime(fakeTime);
         assertEquals(fakeTime, helper.getFakeTime(), "wrong fake time");

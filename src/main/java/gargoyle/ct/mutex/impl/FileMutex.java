@@ -12,7 +12,7 @@ import java.nio.channels.FileLock;
 import java.nio.channels.OverlappingFileLockException;
 
 public final class FileMutex implements CTMutex {
-    public static final String MSG_MUTEX_ERROR = "mutex error";
+    public static final String MSG_MUTEX_ERROR = "file mutex error";
     private static final String SUFFIX = ".lock";
     private static final String TMPDIR = "java.io.tmpdir";
     private static final String USER_DIR = "user.dir";

@@ -16,22 +16,29 @@ public class CTConfig implements Serializable, ObjectInputValidation {
     private static final String MSG_NOT_VALID = "convert is not valid";
     private static final String STR_INVALID = "invalid";
     private static final long serialVersionUID = -898699928298432564L;
-    private long block;
+    private final long block;
     private String name;
-    private long warn;
-    private long whole;
+    private final long warn;
+    private final long whole;
 
     public CTConfig() {
-        init(0, 0, 0, STR_INVALID);
+        Defend.isTrue(isValid(0L, 0L, 0L), MSG_NOT_VALID);
+        whole = 0L;
+        block = 0L;
+        warn = 0L;
+        name = STR_INVALID;
     }
 
     public long getWhole(@NotNull TimeUnit unit) {
         return CTTimeUtil.fromMillis(unit, whole);
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
-    public boolean isValid(long wholeMillis, long blockMillis, long warnMillis) {
-        return wholeMillis > blockMillis && blockMillis > warnMillis;
+    public CTConfig(long whole, long block, long warn) {
+        Defend.isTrue(isValid(whole, block, warn), MSG_NOT_VALID);
+        this.whole = whole;
+        this.block = block;
+        this.warn = warn;
+        name = name(TimeUnit.MINUTES, whole, block);
     }
 
     public CTConfig(@NotNull TimeUnit unit, long whole, long block, long warn) {
@@ -39,12 +46,9 @@ public class CTConfig implements Serializable, ObjectInputValidation {
         name = name(unit, CTTimeUtil.toMillis(unit, whole), CTTimeUtil.toMillis(unit, block));
     }
 
-    public CTConfig(long whole, long block, long warn) {
-        init(whole, block, warn);
-    }
-
-    private void init(long whole, long block, long warn) {
-        init(whole, block, warn, name(TimeUnit.MINUTES, whole, block));
+    @SuppressWarnings({"MethodMayBeStatic", "WeakerAccess"})
+    protected boolean isValid(long wholeMillis, long blockMillis, long warnMillis) {
+        return wholeMillis > blockMillis && blockMillis > warnMillis;
     }
 
     private static String name(@NotNull TimeUnit unit, long whole, long block) {
@@ -73,24 +77,8 @@ public class CTConfig implements Serializable, ObjectInputValidation {
         return warn;
     }
 
-    public void setWarn(long warn) {
-        this.warn = warn;
-    }
-
     public long getWarn(@NotNull TimeUnit unit) {
         return CTTimeUtil.fromMillis(unit, warn);
-    }
-
-    public void setWhole(long whole) {
-        this.whole = whole;
-    }
-
-    private void init(long whole, long block, long warn, String name) {
-        Defend.isTrue(isValid(whole, block, warn), MSG_NOT_VALID);
-        this.whole = whole;
-        this.block = block;
-        this.warn = warn;
-        this.name = name;
     }
 
     public boolean isValid() {
@@ -128,25 +116,9 @@ public class CTConfig implements Serializable, ObjectInputValidation {
         return MessageFormat.format("CTConfig [name={0}, whole={1}, block={2}, warn={3}]", name, whole, block, warn);
     }
 
-    public void setBlock(long block) {
-        this.block = block;
-    }
-
     @NotNull
     public String name(@NotNull TimeUnit unit) {
         return name(unit, whole, block);
-    }
-
-    public void setBlock(@NotNull TimeUnit unit, long block) {
-        this.block = CTTimeUtil.toMillis(unit, block);
-    }
-
-    public void setWarn(@NotNull TimeUnit unit, long warn) {
-        this.warn = CTTimeUtil.toMillis(unit, warn);
-    }
-
-    public void setWhole(@NotNull TimeUnit unit, long whole) {
-        this.whole = CTTimeUtil.toMillis(unit, whole);
     }
 
     @Override

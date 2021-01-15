@@ -3,9 +3,7 @@ package gargoyle.ct.ui.impl.control;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.AbstractButton;
-import javax.swing.Action;
-import javax.swing.Icon;
+import javax.swing.*;
 import javax.swing.event.SwingPropertyChangeSupport;
 import java.beans.PropertyChangeListener;
 import java.util.HashMap;

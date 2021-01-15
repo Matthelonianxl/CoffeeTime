@@ -32,7 +32,7 @@ public abstract class CTSimpleProperty<T> extends CTBaseObservableProperty<T> {
                 thread.join();
             }
         } catch (InterruptedException ex) {
-            throw new RuntimeException(ex);
+            throw new IllegalStateException(ex);
         }
     }
 

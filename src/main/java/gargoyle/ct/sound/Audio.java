@@ -4,7 +4,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
 
-public class Audio {
+public final class Audio {
+    private Audio() {
+    }
+
     @NotNull
     public static AudioClip play(URL url) {
         AudioClip clip = load(url);

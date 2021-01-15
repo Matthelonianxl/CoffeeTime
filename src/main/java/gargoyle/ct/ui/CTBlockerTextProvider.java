@@ -9,7 +9,7 @@ import gargoyle.ct.util.CTTimeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("MethodMayBeStatic")
